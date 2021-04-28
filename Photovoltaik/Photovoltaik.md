@@ -7,7 +7,7 @@ Die Technik sollte jedem bekannt sein, falls dies nicht der Fall ist sind hier n
 - [Planet Wissen](https://www.planet-wissen.de/technik/energie/solarenergie/index.html)
 - [Solaranlagen-abc](https://www.solaranlagen-abc.de/funktion-photovoltaik/)
 - [Wikipedia](https://de.wikipedia.org/wiki/Photovoltaik)
-- [Fraunhofer Institut](https://www.ise.fraunhofer.de/content/dam/ise/de/documents/publications/studies/Photovoltaics-Report.pdf)
+- [Fraunhofer Institut](https://www.ise.fraunhofer.de/content/dam/ise/de/documents/publications/studies/Photovoltaics-Report.pdf) (PDF)
 - [IOP-Science](https://iopscience.iop.org/article/10.1088/1361-6463/ab9c6a/pdf)
 
 ## gemessene Daten
@@ -17,9 +17,10 @@ Zu den Messdaten gehören verschiedene Größen. Primär gemessen wird die Leist
 Jede einzelne Solarzelle erzeugt eine Leistung auf einer bestimmten Spannung (z.B. 0,5V). Einzelne Solarzellen werden in Reihe zu Strings zusammen geschaltet. So wird die Spannung angehoben. (z.B. 50 Solarzellen * 0,5V = 25V) Über den Leistungsverlauf können Aussagen über den Zustand der Anlage gemacht werden. Dies ist Ziel des Projektes. Leider ist die Leistung nicht nur von der Anlage selbst abhängig, sondern auch von anderen Parametern, welche ständig Einfluss auf den Leistungsverlauf haben. Die wichtigsten dieser Parameter werden im Folgenden aufgelistet.
 
 ### Parameter
+In diesem Bereich werden nur Parameter angegeben, bei denen es sich nicht um Fehler hält. Fehler werden im nächsten Kapitel beschrieben.
 
 #### Sonneneinstrahlung
-
+Die Sonneneinstrahlung ist der primäre Faktor, welcher die Leistung eines Moduls bestimmt.
 ![Wetter](./Images/P_T_Wetter.jpg "Auswirkung der Sonneneinstrahlung")
 
 #### Temperatur
@@ -27,9 +28,15 @@ Jede einzelne Solarzelle erzeugt eine Leistung auf einer bestimmten Spannung (z.
 
 #### Jahres- und Tagesverlauf
 
+![Tagesverteilung_Jahresabhängig](./Images/P_T_Jahresverteilung.jpg "Verteilung der Leistung über verschiedenen Tagen im Jahr")
+
 ![Jahreszeit](./Images/P_T_Jahreszeit.jpg "Verteilung der Leistung über einem Jahr")
 
-![Tagesverteilung_Jahresabhängig](./Images/P_T_Jahresverteilung.jpg "Verteilung der Leistung über verschiedenen Tagen im Jahr")
+#### Ort
+![Geographische_Abhängigkeit](./Images/geographical_component.png "Energy Pay-Back Time of Silicon PV Rooftop Systems")
+GTI=Global Tilted Irradiation
+
+#### Ort Höhe
 
 #### Neigung
 
