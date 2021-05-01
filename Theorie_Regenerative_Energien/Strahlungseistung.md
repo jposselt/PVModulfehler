@@ -4,6 +4,6 @@ Fragwürdig erscheinen allerdings folgende Punkte:
 
 * Bestimmung der Strahlungsenergie der Sonne alleine schon sehr diffus und komplex
 * Selbst unter idealer Annahme schwierig für PV-Modul, da Leistungskurve hier auch von schwankenden Paramtern abhängt (Dunkelstrom -> Tempereatur, usw.)
-
+$a^2+b^2=c^2$
 Ungenauigkeiten in diesen Kalukulationen genauso schwerwiegend wie potentielle Modulfehler?
 Sollten überhaupt Berechnungen ausgeführt werden, so dass ideal und real abgeglichen werden kann? 
