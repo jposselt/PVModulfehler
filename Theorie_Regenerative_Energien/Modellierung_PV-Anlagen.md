@@ -14,7 +14,7 @@ Um die oben genannte Fragestellung überhaupt erst beantworten zu können, wird 
 ### Halbleiter/Dioden-Aufbau
 Prinzipiell lassen sich Halbleiter ziemlich unaufwendig gut leitfähig machen. Die liegt daran, dass die Energiedifferenz zwischen dem Valenz- und dem Leitungsband raltiv gering ist. In der Regel ist die Rede von einer Energie von weniger als 5 eV. Dementsprechend können Elektronen durch Erregung durch externe Energiequellen leicht in einen Zustand höherer Energie versetzt werden, das heißt in das Valenzband wechseln. 
 
-![alt  text](Modell_Grundlagen\Energieniveaus.png)
+![alt  text](Modell_Grundlagen/Energieniveaus.png)
 
 Dies ist hier einmal exemplarisch für das Beispiel von Silizium als Halbleiter dargestellt:
 
