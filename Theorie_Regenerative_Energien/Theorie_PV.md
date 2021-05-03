@@ -14,65 +14,65 @@ Um die oben genannte Fragestellung überhaupt erst beantworten zu können, wird 
 ### Halbleiter/Dioden-Aufbau
 Prinzipiell lassen sich Halbleiter ziemlich unaufwendig gut leitfähig machen. Die liegt daran, dass die Energiedifferenz zwischen dem Valenz- und dem Leitungsband raltiv gering ist. In der Regel ist die Rede von einer Energie von weniger als 5 eV. Dementsprechend können Elektronen durch Erregung durch externe Energiequellen leicht in einen Zustand höherer Energie versetzt werden, das heißt in das Valenzband wechseln. 
 
-![alt  text](Modell_Grundlagen\Energieniveaus.png)
+![alt  text](Modellgrundlagen\Energieniveaus.png)
 
 Dies ist hier einmal exemplarisch für das Beispiel von Silizium als Halbleiter dargestellt:
 
-![alt  text](Modell_Grundlagen\Silizium.png)
+![alt  text](Modellgrundlagen\Silizium.png)
 
 Durch die Energie in Form von Wärme oder Licht, werden Elektronen aus den Elektronenpaarbindungen herausgelöst und gehen von dem Valenzband in das Leitungsband über. Damit bilden sichfrei bewegliche Ladungsträger in der Kristallstruktur aus aus, das heißt "positive Ladungsträger" (Löchern) und negative Ladungsträger (die freien Elektronen). 
 
 Bringt man jetzt zwei unterschiedliche dotierte Halbleiter zusammen, das heißt Halbleiter, bei denen diese Löcher beziehungsweise die freien Elektronen durch das Einbringen von Fremdelementen künstlich erschaffen wurden, 
 
-![alt  text](Modell_Grundlagen\Dotierung.png)
+![alt  text](Modellgrundlagen\Dotierung.png)
 
 so bildet sich aufgrund des Potentialunterschied zwischen den beidnen Halbleitervariationen eine Spannung/ein elektrische Feld aus, welches eine Verschiebung der Löcher beziehungsweise der Elektronen hervorbringt. Die Löcher wandern in das n-dotierte Gebiet und die Elektronen in p-dotierte Gebiet. Dadurch ensteht eine sogennante Raumladungszone, in der keine freien Ladungsträger zu Verfügung stehen, diese befinden sich dort also im Valenzband. 
 
-![alt  text](Modell_Grundlagen\Zonen.png)
+![alt  text](Modellgrundlagen\Zonen.png)
 
 Durch diese Ladungsverschiebung bildet sich widerrum ein neues elektrisches Feld aus, welches dem Initialem entgegenwirkt. Der Drift der Ladungsträger findet also solange statt, bis sich beide elektrische Felder ausgleichen beziehungsweise die Gesamtspannung in Addition 0 ergibt. 
 
 Durch das Zuführen von Energie ist es jedoch möglich die Elektronen in der Raumladungszone vom Valenzband in das Leitungsband anzuheben. Im Falle des PV-Moduls würde diese Energie in Form von Photonen hinzugefügt. Die Energie eines Photons beträgt hierbei:
 
-![alt  text](Modell_Grundlagen\Energie_Photon.png)
+![alt  text](Modellgrundlagen\Energie_Photon.png)
 
  Dadurch sind in der Raumladungszone wieder freie Ladungsträger zu Verfügung und es findet ein Elektronenfluss ensprechend der Feldrichtung des elektrischen Feldes der Raumladungszone statt. Schließt man von außen nun einen elektrischen Verbraucher an das Modul an, so wird dieser von dem entstehenden Strom gespeist. 
 
-![alt  text](Modell_Grundlagen\PhotoelektrischerEffekt.png)
+![alt  text](Modellgrundlagen\PhotoelektrischerEffekt.png)
 
 ---
 
 ### Ein-Dioden-Modell 
 Vereinfachter Aufbau eines PV-Moduls:
 
-![alt  text](Modell_Grundlagen\PV-Modul.png)
+![alt  text](Modellgrundlagen\PV-Modul.png)
 
 Da es sich bei einem PV-Modul im Grunde genommen aus physikalischer Sicht um eine Diode handelt, kann zur einfachen Modellierung dieses Bauteils das angeführte Ersatzschaltbild verwendet werden. Dies gilt nur, sofern das PV-Modul rein als Erzeuger betrachter wird.
 
-![alt  text](Modell_Grundlagen\Ein-Dioden-Modell.png)
+![alt  text](Modellgrundlagen\Ein-Dioden-Modell.png)
 
 Aus den Kirchhoffschen Gesetzen berechnet sich gemäß der Knotenregel die Ausgangskennlinie eines PV-Moduls nach diesem ESB mit dem Ausdruck.
 
-![alt  text](Modell_Grundlagen\Ein-Dioden-Modell-Gleichung.png)
+![alt  text](Modellgrundlagen\Ein-Dioden-Modell-Gleichung.png)
 
 *I<sub>Ph</sub>* ist dabei der Photostrom, der direkt proportional zur Bestrahlungsstärke E ist. 
 
-![alt  text](Modell_Grundlagen\Iph.png)
+![alt  text](Modellgrundlagen\Iph.png)
 
 I<sub>s</sub> ist der Sättigungsstrom der Diode in Sperrrichtung, dieser liegt bei Silizium-Dioden in der Regel im Bereich von 10<sup>−10</sup> A. Der Parameter m beschreibt den sogenannten Diodenfaktor, welcher angeben soll, in welcher Form Rekombinationsmechanismen bei verschiedenen Temperaturen innerhalb des Halbleiters auftreten.
     
 
-![alt  text](Modell_Grundlagen\Diodenfaktor.png)
+![alt  text](Modellgrundlagen\Diodenfaktor.png)
 
 Schlussendlich lässt sich sagen, dass *U<sub>t</sub>* als Temperaturspannung bezeichnet wird, die nach dem Zusammenhang 
 
-![alt  text](Modell_Grundlagen\Ut.png)
+![alt  text](Modellgrundlagen\Ut.png)
 
 ca. 25,7 mV bei 25 °C beträgt. 
 
 Eine typische Ausgangskennlinie für dieses Modell hat diesen Verlauf:
 
-![alt  text](Modell_Grundlagen\Ein-Dioden-Modell-Kennlinie.png)
+![alt  text](Modellgrundlagen\Ein-Dioden-Modell-Kennlinie.png)
 
 ---
 
@@ -80,16 +80,16 @@ Eine typische Ausgangskennlinie für dieses Modell hat diesen Verlauf:
 
 In den meisten Fällen reicht das zuvor genannte Modell aus, um ein PV-Modul zu modellieren. Möchte man das zuvor genannte Modell weiterhin genauer auf den realen Sachverhalt abbilden, lässt sich dieses noch durch zusätzliche Bauteile erweitern. Dabei handelt es sich um eine zweite Diode, welche parallel zu der ersten geschaltet wird, einen Serienwiderstand      *R<sub>s</sub>*, welcher die ohmschen Verluste der Zuleitung abbilden soll und einen weiteren Parallelwiderstand *R<sub>p</sub>* zu den Dioden, welcher die Leckverluste abbildet. Das Ersatzschaltbild sieht dann wie folgt aus.
 
-![alt  text](Modell_Grundlagen\Zwei-Dioden-Modell.png)
+![alt  text](Modellgrundlagen\Zwei-Dioden-Modell.png)
 
 Die Ausgangskennlinie kann dann wieder einfach aus den Kirchhoffschen-Gesetzen abgeleitet werden (Knotenregel).
 
-![alt  text](Modell_Grundlagen\Zwei-Dioden-Modell-Gleichung.png)
+![alt  text](Modellgrundlagen\Zwei-Dioden-Modell-Gleichung.png)
 
 Die beiden Widerstände wirken sich wie folgt auf die Kennlinie aus.
 
-![alt  text](Modell_Grundlagen\Zwei-Dioden-Modell-Rs.png)
-![alt  text](Modell_Grundlagen\Zwei-Dioden-Modell-Rp.png)
+![alt  text](Modellgrundlagen\Zwei-Dioden-Modell-Rs.png)
+![alt  text](Modellgrundlagen\Zwei-Dioden-Modell-Rp.png)
 
 ---
 
@@ -100,43 +100,43 @@ Dazu wird zunächst nur ein Modell für den Spezialfall thematisiert, dass alle 
 
 Zu Beginn sei anzumerken, dass sich die Modulspannung der einzelnen Komponenten in Reihe aufaddiert, der Gesamtstrom entspricht dem eines Einzelmoduls. 
 
-![alt  text](Modell_Grundlagen\Reihenschaltung_PV-Anlage.png)
+![alt  text](Modellgrundlagen\Reihenschaltung_PV-Anlage.png)
 
 Gleicher Strom:
 
-![alt  text](Modell_Grundlagen\Reihenschaltung_PV-Anlage-Current.png)   
+![alt  text](Modellgrundlagen\Reihenschaltung_PV-Anlage-Current.png)   
 
 Aufaddierte Spannung:
 
-![alt  text](Modell_Grundlagen\Reihenschaltung_PV-Anlage-Voltage.png)
+![alt  text](Modellgrundlagen\Reihenschaltung_PV-Anlage-Voltage.png)
 
 Die resultierende Kennlinie aus den genannten Effekten ergibt sich dann wie folgt:
 
-![alt  text](Modell_Grundlagen\Reihenschaltung_PV-Anlage-Kennlinie.png)
+![alt  text](Modellgrundlagen\Reihenschaltung_PV-Anlage-Kennlinie.png)
 
 Da die Größen aus den zuvor genannten Modellen zur Mehrzahl Theoriegrößen sind, welches sich in der Praxis kaum realistisch bestimmen lassen, versucht man den Sachverhalt der Reihenschaltung von PV-Anlagen auf möglichst einfache angebbare Herstellergrößen herunterzubrechen, aus welchen sich dann ziemlich simpel die Kennlinie für den momentanen Sachverhalt berechnen lässt. Das bedeutet für die aktuelle Beleuchtungsstärke sowie die Modultemperatur. 
 
 Diese Herstellergrößen sind meist auf STC-Fall (standard test conditions) bezogen, welcher eine Beleuchtungsstärke von 1000 W/m<sup>2</sup> und eine Temperatur von 25 °C vorraussetzen. Die spezifischen Parameter ergeben sich dann zu 
 
-![alt  text](Modell_Grundlagen\Reihenschaltung_PV-Anlage-Params1.png)
+![alt  text](Modellgrundlagen\Reihenschaltung_PV-Anlage-Params1.png)
 
-![alt  text](Modell_Grundlagen\Reihenschaltung_PV-Anlage-Params1_.png)
+![alt  text](Modellgrundlagen\Reihenschaltung_PV-Anlage-Params1_.png)
 
 ergeben. Die Anzahl der PV-Module steckt dabei in *U<sub>L</sub>* beziehungsweise *U<sub>MPP</sub>* aufgrund der Spannungsaddition in Reihe. Weiterhin wissenswert ist, dass der Photostrom näherungsweise mit dem Kurzschlusstrom des Moduls gleichgesetzt werden und dass die MPP-Größen sich auf den Punkt des maximalen Leistungsflusses von Erzeuger zu Verbraucher beziehen (Widerstandsanpassung/Reflexionminimierung).
 
-![alt  text](Modell_Grundlagen\PV-Anlage-MPP.png)
+![alt  text](Modellgrundlagen\PV-Anlage-MPP.png)
 
 Die Kennlinie für eine Reihenschaltung von PV-Modulen kann dann durch den Ausdruck 
 
-![alt  text](Modell_Grundlagen\Reihenschaltung_PV-Anlage-Formel.png)
+![alt  text](Modellgrundlagen\Reihenschaltung_PV-Anlage-Formel.png)
 
 mit 
 
-![alt  text](Modell_Grundlagen\Reihenschaltung_PV-Anlage-c1.png) 
+![alt  text](Modellgrundlagen\Reihenschaltung_PV-Anlage-c1.png) 
 
 und 
 
-![alt  text](Modell_Grundlagen\Reihenschaltung_PV-Anlage-c2.png)
+![alt  text](Modellgrundlagen\Reihenschaltung_PV-Anlage-c2.png)
 
 in guter Näherung beschrieben werden.
 
