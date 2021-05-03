@@ -1,5 +1,3 @@
-<style>H3,H2,H1{color:steelblue;}</style>
-
 # Evalierungen des theoretsichen PV-Modells bezüglich ML
 Das ultimative Ziel dieser Ausarbeitung ist es, zu analysieren, ob sich mithilfe theoretischer Modelle von PV-Anlagen ein neuronales Netz einlernen lässt. Hierbei sollen Fehler im Modell simuliert werden, um das Netz dann auf diese zu trainieren. So soll das neuronale Netz dann auch reale Fehler erkennen und einordnen können.
 
@@ -20,7 +18,7 @@ Dies ist hier einmal exemplarisch für das Beispiel von Silizium als Halbleiter 
 
 ![alt  text](./Modellgrundlagen/Silizium.PNG)
 
-Durch die Energie in Form von Wärme oder Licht, werden Elektronen aus den Elektronenpaarbindungen herausgelöst und gehen von dem Valenzband in das Leitungsband über. Damit bilden sichfrei bewegliche Ladungsträger in der Kristallstruktur aus aus, das heißt "positive Ladungsträger" (Löchern) und negative Ladungsträger (die freien Elektronen). 
+Durch die Energie in Form von Wärme oder Licht, werden Elektronen aus den Elektronenpaarbindungen herausgelöst und gehen von dem Valenzband in das Leitungsband über. Damit bilden sich frei bewegliche Ladungsträger in der Kristallstruktur aus , das heißt "positive Ladungsträger" (Löchern) und negative Ladungsträger (die freien Elektronen). 
 
 Bringt man jetzt zwei unterschiedliche dotierte Halbleiter zusammen, das heißt Halbleiter, bei denen diese Löcher beziehungsweise die freien Elektronen durch das Einbringen von Fremdelementen künstlich erschaffen wurden, 
 
