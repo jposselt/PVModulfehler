@@ -48,7 +48,7 @@ Wer sich noch detaillierter in das Thema einarbeiten will hat hier verschiedene 
 - [IOP-Science](https://iopscience.iop.org/article/10.1088/1361-6463/ab9c6a/pdf) (PDF)
 
 ### Arten von Photovoltaik-Modulen
-Es gibt verschiedene Arten von PV-Modulen, welche alle die selben grundlegenden Eigenschaften besityen. Das Trägermaterial aller Module ist Glas. Dieses wird mit den photoaktiven Halbleitern erweitert, welche für die tatsächliche Energieerzeugung verantwortlich sind. Dabei handelt es sich in der regel um Siliciumzellen. Hierauf wird in den folgenden Abschnitten im Detail eingegangen. Ein PV-Modul ist aus vielen einzelnen Zellen aufgebaut, welche zu Strings zusammengeschaltet werden. Zum Schutz vor Fehlern werden einzelne Strings mit Schutzdioden überbrückt. 
+Es gibt verschiedene Arten von PV-Modulen, welche alle die selben grundlegenden Eigenschaften besitzen. Das Trägermaterial aller Module ist Glas. Dieses wird mit den photoaktiven Halbleitern erweitert, welche für die tatsächliche Energieerzeugung verantwortlich sind. Dabei handelt es sich in der regel um Siliciumzellen. Hierauf wird in den folgenden Abschnitten im Detail eingegangen. Ein PV-Modul ist aus vielen einzelnen Zellen aufgebaut, welche zu Strings zusammengeschaltet werden. Zum Schutz vor Fehlern werden einzelne Strings mit Schutzdioden überbrückt. 
 
 Der Wirkungsgrad von PV-Modulen unterscheidet sich stark zwischen den einzelnen Typen. Er hat sich jedoch bei jedem Typ in den letzten 50 Jahren stark verbessert. In der folgenden Übersicht ist der Verlauf des Wirkungsgrades für verschiedene PV-Modul-Typen über die letzten Jahre dargestellt.
 
