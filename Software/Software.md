@@ -2,7 +2,9 @@
 Im Rahmen des Projekts werden verschiedene Softwarelösungen und Bibliotheken zur Entwicklung von künstlichen neuronalen Netzen, zur Vorverarbeitung und Visualisierung der zur Verfügung stehenden Daten verwendet. Der Quellcode wird in der Programmiersprache Python 3 in verbindung mit verschiedenen Bibliotheken geschrieben.
 
 ## IPython
-IPython ist eine Kommandozeileninterpreter für das interaktive Arbeiten mit Python. Es unterstützt das entwickeln und ausführen von Python-Programmen. Außerdem kann es für High-Performance-Rechnungen mithilfe von Parallelrechnern verwendet werden, da es ein Client-Server-Framework darstellt.
+IPython ist eine Kommandozeileninterpreter für das interaktive Arbeiten mit Python. Es unterstützt das entwickeln und ausführen von Python-Programmen
+IPython verwendet caching von Code-Outputs während der Entwicklung. 
+Außerdem kann es für High-Performance-Rechnungen mithilfe von Parallelrechnern verwendet werden, da es ein Client-Server-Framework darstellt.
 
 ## Keras
 Keras ist eine Open Source Deep-Learning-Bibliothek, die in Python entwickelt wurde. Sie kann verschiedene Backend-Engines verwenden, darunter sind Tensorflow, Microsoft Cognitive Toolkit und Theano. Seit Tensorflow 1.4 ist Keras ein Teil der Tensorflow Core API, besteht aber weiterhin als eigenständige Bibliothek. Die Ausführung von Programmen mit Keras ist auf der CPU und GPU möglich.
@@ -28,3 +30,4 @@ Pandas ist eine Bibliothek, die Hilfmittel für die Datenanalyse und Datenverwal
 https://faroit.com/keras-docs/1.2.0/ <br>
 https://www.tensorflow.org/learn?hl=en <br>
 https://ipython.readthedocs.io/en/stable/ <br>
+https://pandas.pydata.org/ <br>
