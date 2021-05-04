@@ -315,12 +315,10 @@ Keras ist eine Open Source Deep-Learning-Bibliothek, die in Python entwickelt wu
    - Alle Funktionen von Keras sind mit Python verwendbar, es werden keine weiteren config-Dateien oder ähnliches benötigt
 
 ###Tensorflow
-
 Tensorflow ist eine Open-Source Plattform die für die Entwicklung und Trainieren von Machine-Learning-Modellen verwendet werden kann. Die entwickelten Modelle können mit Tensorflow einfach auf verschiedene Plattformen veröffentlicht werden.
 Im laufe des Projekts wird es als Backend-Engine für Keras verwendet. 
 
 ##Quellen
-
 https://www.photovoltaik.org/photovoltaikanlagen
 
 https://www.photovoltaik.org/wissen/photovoltaik-wirkungsgrad
