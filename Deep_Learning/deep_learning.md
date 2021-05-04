@@ -8,11 +8,16 @@ Zur sinnvollen Trennung der Daten muss oft im Vorfeld eine Merkmalsextraktion un
   
 ### McCulloch/Pitts Zelle
 Der Beginn der Entwicklung künstlicher neuronaler Netze wird oft auf das 1943 von Warren McCulloch und Walter Pitts vorgestellte „künstliche Neuron“ datiert. Inspiriert von der damaligen Grundlagenforschung zu biologischen Neuronen stellt das „künstliche Neuron“ ein einfaches Modell dar, das die Signalweiterleitung im Gehirn simulieren soll. Dieses Neuron besteht aus mehreren Eingangsleitungen und einer Ausgangsleitung, die jeweils binäre Signale verarbeiten oder ausgeben können. Die Eingangsleitungen können dabei das Attribut „hemmend“ oder „bestärkend“ besitzen. Ist mindestens eine hemmende Eingangsleitung aktiv, wird der Ausgang des Neurons inaktiv geschaltet. Sind eine vorgegebene Menge an bestärkenden Eingangsleitungen aktiv, schaltet das Neuron den Ausgang aktiv. Durch Vernetzung mehrerer derartiger künstlicher Neuronen ist die Berechnung komplexer logischer Verknüpfungen möglich. Die Netze werden dann für die jeweilige Aufgabe im Vornherein parametriert, indem die hemmenden und bestärkenden Leitungen und die Schaltschwellen vorgegeben werden
+
+![](Images/mcculloch.png "McCulloch Pitts")
   
 ### Multilayer Perzeptron
 Im Jahre 1957 stellte Frank Rosenblatt das sogenannte Perzeptron als ein erweitertes Modell eines künstlichen Neurons vor. Die Signale sind hier nicht mehr binär, sondern können Zahlenwerte annehmen. Jede Eingangsleitung besitzt eine Gewichtung mit der die einzelnen Signalwerte multipliziert werden. Die Summe dieser gewichteten Werte wird als Eingabewert einer sogenannten Aktivierungsfunktion verwendet. Der Ausgabewert dieser Funktion ist der des Perzeptrons. Als Aktivierungsfunktion wird zum Beispiel die Heaviside-Funktion verwendet.
   
-ℎ𝑒𝑎𝑣𝑖𝑠𝑖𝑑𝑒(𝑧)={0 𝑤𝑒𝑛𝑛 𝑧<01 𝑤𝑒𝑛𝑛 𝑧≥0 (1)
+ℎ𝑒𝑎𝑣𝑖𝑠𝑖𝑑𝑒(𝑧)={
+    0 𝑤𝑒𝑛𝑛 𝑧<0 
+    1 𝑤𝑒𝑛𝑛 𝑧≥0
+}
   
 Durch Hintereinanderschaltung mehrerer paralleler Perzeptronen wurde die Basis moderner künstlicher neuronaler Netze gelegt. Die Topologie derartiger Netze besteht aus einer Eingabeschicht, die jedes Eingangssignal an jedes in der dahinterliegenden Schicht liegende Neuron weiterleitet. Auf diese Schicht können dann beliebig viele weitere Schichten gestapelt werden. Die letzte dieser Schichten wird als Ausgabeschicht bezeichnet, die zwischen dieser und der Eingabeschicht liegenden als verborgende Schichten. Liegt ein Netz mit insgesamt drei Schichten vor, wird dieses Netz als Multilayer Perzeptron bezeichnet. Erst 1986 wurde mit dem Backpropagation-Algorithmus und der Ersetzung der Heaviside-Aktivierungsfunktion mit einer stetig differenzierbaren Funktion die Möglichkeit gegeben neuronale Netze aufgrund von Daten zu trainieren
   
