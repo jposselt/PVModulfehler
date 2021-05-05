@@ -104,11 +104,11 @@ Der Auftrittswinkel der Sonnenstrahlen auf dem PV-Modul ist ausschlaggebend bez�
 
 ![Ausrichtung](images/ausrichtung_neigung.jpg "Auswirkung der Neigung auf den Leistungsertrag")
 
-###Modulfehler
+### Modulfehler
 
 Von Fehlern betroffene Zelle produzieren zum einen proportional zur fehlenden Fläche weniger Strom, zum Anderen beeinflusst dies die Leistung des gesamten Strings. Je nach Größe des abgetrennten Bereichs kann dies zum Abschalten eines Modulteilstrings über die Bypass-Diode führen.
 
-####Fehlerarten
+#### Fehlerarten
 
 Konstante Fehler:
 - Verschmutzung: PV-Anlagen verschmutzen mit der Zeit, insbesondere in Gebieten, in denen es nicht häufig regnet oder wenn die PV-Module einen flachen Aufstellwinkel haben (<10°). Insbesondere Laubabwurf und Staubquellen können zu Verschmutzung führen. [WIRTH21]
