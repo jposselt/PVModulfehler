@@ -15,7 +15,7 @@ PV-Anlagen sind der Untersuchungsgegenstand dieses Projekts. Daher erfolgt hier 
 
 PV-Module basieren auf Halbleitern, d.h. Materialien welche nur unter bestimmten Umständen elektrisch leitend sind. Für PV-Module wird vorrangig Silizium eingesetzt. Die Stromerzeugung im Halbleiter basiert auf zwei physikalischen Prozessen. Der Erste ist der *innere Photoeffekt*, bei welchem durch das Auftreffen von Photonen auf der Halbleiterschicht Elektronen aus ihr herausgelöst werden. Dadurch verbleiben im Halbleiter das negativ geladene Elektron und ein positiv geladenes 'Loch'. Da beide frei beweglich sind ist die erste Voraussetzung für den Fluss elektrischen Stromes erfüllt. Allerdings würden sich die freien Elektronen und Löcher unter normalen Umständen schnell wieder vereinen. Dies wird durch den speziellen Aufbau des PV-Moduls (siehe Abbildung) verhindert.
 
-![Solarzelle](images/solarzelle.png "Aufbau einer Solarzelle")
+![Solarzelle](images/Solarzelle.png "Aufbau einer Solarzelle")
 
 Eingeschlossen zwischen positiver und negativer Elektrode befindet sich das Halbleitermaterial. Es handelt sich hierbei um Material, in welches Fremdatome eingefügt wurden (Dotierung). In der Praxis sind dies in der Regel Bor und Phosphor. Das dotierte Halbleitermaterial besteht aus zwei Schichten. eine p-dotierte Lage (in der Abbildung unten) in der ein Überschuss an positiven Löchern vorherrscht und eine n-dotierte Lage (in der Abbildung oben), in welcher sich mehr Elektronen befinden. Zwischen beiden Schichten befindet sich der pn-Übergang in dem sich Löcher aus der p-Lage mit Elektronen aus der n-Lage vereinen. Dadurch entsteht eine Grenzschicht, die den freien Fluss von Ladungsträgern verhindert und noch der Weg über den Verbraucher bleibt.
 
