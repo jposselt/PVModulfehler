@@ -135,7 +135,7 @@ Die Thermografie kann sowohl Risse in den Zellen als auch Verunreinigungen oder 
 
 Das Thermografie-Verfahren erfordert aber eine Beobachtung der PV-Module mit Wärmebildkameras, was für den Betrieb einer Anlage zusätzlichen technischen und finanziellen Aufwand bedingt, so dass diese Daten, wenn überhaupt, nicht kontinuierlich verfügbar sind. Für das vorliegende Projekt soll daher das Zeit-Leistungs-Verhalten von PV-Anlagen untersucht werden. Die Herausforderung ist dabei die Auswirkungen von Fehlern von anderen Einflüssen zu unterscheiden.
 
-###Theoretische Modellierung von PV-Anlagen
+### Theoretische Modellierung von PV-Anlagen
 
 #### Halbleiter/Dioden-Aufbau
 Prinzipiell lassen sich Halbleiter mit wenig Aufwand leitfähig machen. Die liegt daran, dass die Energiedifferenz zwischen dem Valenz- und dem Leitungsband relativ gering ist. In der Regel ist die Rede von einer Energie von weniger als 5 eV. Dementsprechend können Elektronen durch Erregung durch externe Energiequellen leicht in einen Zustand höherer Energie versetzt werden, das heißt in das Valenzband wechseln. 
@@ -245,7 +245,7 @@ Diese Herstellergrößen sind meist auf STC-Fall (standard test conditions) bezo
 
 ergeben. Die Anzahl der PV-Module steckt dabei in *U<sub>L</sub>* beziehungsweise *U<sub>MPP</sub>* aufgrund der Spannungsaddition in Reihe. Weiterhin wissenswert ist, dass der Photostrom näherungsweise mit dem Kurzschlusstrom des Moduls gleichgesetzt werden und dass die MPP-Größen sich auf den Punkt des maximalen Leistungsflusses von Erzeuger zu Verbraucher beziehen (Widerstandsanpassung/Reflexionminimierung).
 
-![alt  text](./images/PV-Anlage-MPP.PNG)
+![alt  text](./images/PV-Anlage-MPP.png)
 
 Die Kennlinie für eine Reihenschaltung von PV-Modulen kann dann durch den Ausdruck 
 
