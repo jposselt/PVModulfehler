@@ -37,18 +37,15 @@ data.rename(columns = {'AnalysisGroup_string':'Orientation'}, inplace = True)
 
 #%% Daten in Zeitreihe umwandeln
 
-# Das Datum in Time Spalte ist nicht im Datetime-Standardformat (YY-MM-DD). Einfaches Casten würde zu
-# Konvertierungsfehlern führen. Statt dessen muss das Eingabeformat mit angegeben werden.
-data['Time'] = pd.to_datetime(data['Time'], format='%d.%m.%y %H:%M')
-
-# Liste der einzelnen Tage als datetime Objekte
-days = data['Time'].map(pd.Timestamp.date).unique()
-t = datetime.min.time()
-to_daytime = lambda x: datetime.combine(x, t)
-days = np.array([to_daytime(d) for d in days])
+# Time (im Format DD.MM.YY) in DatetimeIndex umwandeln
+data['Time'] = pd.DatetimeIndex(data['Time'], dayfirst=True)
 
 # Time als Index setzen.
 data.set_index('Time', inplace=True)
+
+#%% List aller Tage mit PV-Daten als datetime.datetime Objekte
+days = data.index.normalize().unique().to_pydatetime()
+display(days)
 
 #%% Wetterdaten laden
 
