@@ -1,5 +1,4 @@
-import numpy
-from numpy.lib.function_base import extract
+import matplotlib.pyplot as plt
 import datetime
 import pandas
 
@@ -11,6 +10,7 @@ class DataFetcherSimulated:
         self.sheet_name = sheet_name
         self.columns = columns
         self.extract_info()
+        self.extract_data()
 
     def extract_info(self):
         info = pandas.read_excel(self.file_name, sheet_name=self.sheet_name, usecols="A,B")
@@ -20,7 +20,7 @@ class DataFetcherSimulated:
                 self.info[info.iat[row, 0]] = info.iat[row, 1]
     
     def extract_data(self):
-        raw_data = pandas.read_excel(self.file_name, sheet_name=self.sheet_name, skiprows=3, usecols="H,I,J,K,L,M,N")
+        raw_data = pandas.DataFrame(pandas.read_excel(self.file_name, sheet_name=self.sheet_name, skiprows=3, usecols="H,I,J,K,L,M,N"))
         day = 1
         old_time = datetime.time(0)
         for row in range(raw_data.shape[0]):
@@ -35,15 +35,23 @@ class DataFetcherSimulated:
         self.data.plot(subplots=True, x='Time', legend=True, figsize=(60, 30), title=self.info['Faults：'], fontsize=30, grid=True, xlabel='Time')
 
 
+    def scatter_plot(self, x, y):
+        title = "Scatterplot " + y + " over " + x
+        return self.data.plot(subplots=True, x=x, y=y, legend=True, figsize=(60, 30), title=title, fontsize=30, grid=True, xlabel=x, ylabel=y, kind='scatter')
 
-df_shade = DataFetcherSimulated(r'../Daten_Simuliert/daten_schatten.xls', '1subs_fixed shadow', ['Time', 'S', 'T', 'S1', 'P', 'V', 'I'])
 
-df_shade.extract_data()
-print(df_shade.info)
-print(df_shade.data)
-df_shade.plot_data()
+def plot_mult(objs, x, y, title='', xlabel='', ylabel=''):
+    for ob in objs:
+        plt.scatter(ob.data[x], ob.data[y], s=1)
+    plt.title(title)
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    plt.grid(True)
+    plt.show()
 
-df_diode = DataFetcherSimulated(r'../Daten_Simuliert/daten_defekteDioden.xls', '1subs_1BD', ['Time', 'P'])
-print (df_diode.info)
-df_diode.extract_data()
-df_diode.plot_data()
+#df_shade = DataFetcherSimulated(r'../Daten_Simuliert/daten_schatten.xls', '1subs_fixed shadow', ['Time', 'S', 'T', 'S1', 'P', 'V', 'I'])
+
+#df_shade.extract_data()
+#print(df_shade.info)
+#print(df_shade.data)
+#df_shade.plot_data()
