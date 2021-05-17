@@ -15,14 +15,14 @@ filePath = "data/32771/32771_WR2_1200_Westgaube_1_2019-01-01-2019-01-31_0.csv"
 # Jeder Merkmalsvektore besitzt die Inhalte 'AcPower','Edaily','Temp1','Dci','Dcp','Dcu' und Wetterdaten 
 # Und dann Normalisieren und dann Hauptkomponentenanalyse für jeden Zeitpunkt vielleicht?
 
-class daddaPlodda():
+class datenPlotter():
     def __init__(self, key, file):
         # Init 
         self.darkskyKey = key
         # Lade die Daten 
         self.timeSeriesData = self.loadData(file)
     
-    def plotWättaVSPauuer(self):
+    def plotFeatures(self):
         # Mittels groupby können die einzelnen Tage dargestellt werden
         for index, day in self.timeSeriesData.groupby(self.timeSeriesData.index.date):
             # Vorhersage für diesen Tag
@@ -52,5 +52,5 @@ class daddaPlodda():
 
 
 
-da = daddaPlodda(key, filePath)
+da = datenPlotter(key, filePath)
 da.plotWättaVSPauuer()
