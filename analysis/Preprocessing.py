@@ -73,13 +73,13 @@ class Preprocessor:
     
     def generatePlots(self, destination, columns):
         # TODO:
-        #   distributions plots (https://seaborn.pydata.org/generated/seaborn.displot.html)
-        #   boxplots (https://seaborn.pydata.org/generated/seaborn.boxplot.html)
-        #   violin plots (https://seaborn.pydata.org/generated/seaborn.violinplot.html)
-        #   corrolation heatmap (https://seaborn.pydata.org/generated/seaborn.heatmap.html)
-        #   bivariate plots (https://seaborn.pydata.org/examples/layered_bivariate_plot.html)
-        #   pair plots (https://seaborn.pydata.org/generated/seaborn.pairplot.html)
-        #   linear regression with marginal distributions (https://seaborn.pydata.org/examples/regression_marginals.html)
+        #   distributions plots (https://seaborn.pydata.org/generated/seaborn.displot.html)                                 Dominik
+        #   boxplots (https://seaborn.pydata.org/generated/seaborn.boxplot.html)                                            Marius
+        #   violin plots (https://seaborn.pydata.org/generated/seaborn.violinplot.html)                                     Niklas
+        #   corrolation heatmap (https://seaborn.pydata.org/generated/seaborn.heatmap.html)                                 Tristan
+        #   bivariate plots (https://seaborn.pydata.org/examples/layered_bivariate_plot.html)                               Jonas
+        #   pair plots (https://seaborn.pydata.org/generated/seaborn.pairplot.html)                                         Jonas
+        #   linear regression with marginal distributions (https://seaborn.pydata.org/examples/regression_marginals.html)   Dominik
 
         for col in columns:
             for row in columns:
