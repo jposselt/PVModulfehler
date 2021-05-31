@@ -1,6 +1,10 @@
 import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
 from analysis.Weather import DarkskyApiDownloader
 from utils.fileUtils import loadMultipleFilesByPattern
+
+from IPython.display import display
 
 class Preprocessor:
     """Class for loading and preprocessing of data.
@@ -51,6 +55,16 @@ class Preprocessor:
         # make time column the index
         self.df.set_index('Time', inplace=True)
 
+        # setup categories for year, month and day
+        self.df['Year'] = self.df.index.year
+        self.df['Year'].astype('category')
+
+        self.df['Month'] = self.df.index.month
+        self.df['Month'].astype('category')
+
+        self.df['Day'] = self.df.index.day
+        self.df['Day'].astype('category')
+
         # list all days in dataframe as datetime.datetime objects
         days = self.df.index.normalize().unique().to_pydatetime()
 
@@ -70,7 +84,40 @@ class Preprocessor:
 
         return self.df
 
-    
+
+    def generateBivariatePlot(self, x, y, destination, size_x=6, size_y=6, style="dark"):
+        """Generate bivariate distribution plot
+
+        Args:
+            x (str): Variables that specifies positions on the x axes.
+            y (str): Variables that specifies positions on the y axes.
+            destination (str): Destination folder for resluting plot
+            size_x (int, optional): Figure width in inches. Defaults to 6.
+            size_y (int, optional): Figure height in inches. Defaults to 6.
+            style (str, optional): Style option passed to seaborn. Defaults to "dark".
+        """
+        sns.set_theme(style=style)
+        fig, ax = plt.subplots(figsize=(size_x, size_y))
+        sns.scatterplot(x=x, y=y, data=self.df)
+        sns.histplot(x=x, y=y, data=self.df, bins=50, pthresh=.1, cmap="mako")
+        sns.kdeplot(x=x, y=y, data=self.df, levels=5, color="w", linewidths=1)
+        fig.savefig(destination + x + "_" + y + ".png")
+        plt.close(fig)
+
+
+    def generatePairplot(self, columns, destination):
+        """Generate plot of pairwise relationships in a dataset.
+
+        Args:
+            columns (list[str]): List of columns included in plot
+            destination (str): Destination folder for resluting plot
+        """
+        plot = sns.pairplot(self.df[columns], diag_kind="kde")
+        plot.map_lower(sns.kdeplot, levels=4, color=".2")
+        plot.savefig(destination + "Pairplot.png")
+        plt.close(plot.fig)
+
+
     def generatePlots(self, destination, columns):
         # TODO:
         #   distributions plots (https://seaborn.pydata.org/generated/seaborn.displot.html)                                 Dominik
@@ -80,19 +127,20 @@ class Preprocessor:
         #   bivariate plots (https://seaborn.pydata.org/examples/layered_bivariate_plot.html)                               Jonas
         #   pair plots (https://seaborn.pydata.org/generated/seaborn.pairplot.html)                                         Jonas
         #   linear regression with marginal distributions (https://seaborn.pydata.org/examples/regression_marginals.html)   Dominik
-
+        
+        self.generatePairplot(columns, destination)
+        
         for col in columns:
             for row in columns:
                 if row == col:
                     # TODO: univariate plots
                     pass
                 else:
-                    # TODO: bivariate plots
-                    pass
+                    self.generateBivariatePlot(row, col, destination)
 
 
     def restrictDaytimeInterval(self, startTime, endTime):
-        pass
+        return self.df.between_time(startTime, endTime)
 
 
     def saveDataframe(self, path):
