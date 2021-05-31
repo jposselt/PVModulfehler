@@ -59,7 +59,7 @@ class Preprocessor:
         reports = self.darksky.downloadWeatherData(lat, lon, days, self.reportsDir, prefix)
 
         # combine weather reports
-        dataPrefix="weather_"
+        dataPrefix="" # prefix for column names
         weather = self.darksky.combineAndPreprocessWeatherdata(reports, resampleTime='15T', prefix=dataPrefix)
 
         # remove unused column
@@ -69,6 +69,31 @@ class Preprocessor:
         self.df = pd.merge(self.df, weather, left_index=True, right_index=True)
 
         return self.df
+
+    
+    def generatePlots(self, destination, columns):
+        # TODO:
+        #   distributions plots (https://seaborn.pydata.org/generated/seaborn.displot.html)
+        #   boxplots (https://seaborn.pydata.org/generated/seaborn.boxplot.html)
+        #   violin plots (https://seaborn.pydata.org/generated/seaborn.violinplot.html)
+        #   corrolation heatmap (https://seaborn.pydata.org/generated/seaborn.heatmap.html)
+        #   bivariate plots (https://seaborn.pydata.org/examples/layered_bivariate_plot.html)
+        #   pair plots (https://seaborn.pydata.org/generated/seaborn.pairplot.html)
+        #   linear regression with marginal distributions (https://seaborn.pydata.org/examples/regression_marginals.html)
+
+        for col in columns:
+            for row in columns:
+                if row == col:
+                    # TODO: univariate plots
+                    pass
+                else:
+                    # TODO: bivariate plots
+                    pass
+
+
+    def restrictDaytimeInterval(self, startTime, endTime):
+        pass
+
 
     def saveDataframe(self, path):
         """Save dataframe as HDF5 file.
