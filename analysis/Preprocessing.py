@@ -91,7 +91,7 @@ class Preprocessor:
         Args:
             x (str): Variables that specifies positions on the x axes.
             y (str): Variables that specifies positions on the y axes.
-            destination (str): Destination folder for resluting plot
+            destination (str): Destination folder for resulting plot
             size_x (int, optional): Figure width in inches. Defaults to 6.
             size_y (int, optional): Figure height in inches. Defaults to 6.
             style (str, optional): Style option passed to seaborn. Defaults to "dark".
@@ -109,26 +109,63 @@ class Preprocessor:
         """Generate plot of pairwise relationships in a dataset.
 
         Args:
-            columns (list[str]): List of columns included in plot
-            destination (str): Destination folder for resluting plot
+            columns (list[str]): List of variables included in plot
+            destination (str): Destination folder for resulting plot
         """
         plot = sns.pairplot(self.df[columns], diag_kind="kde")
         plot.map_lower(sns.kdeplot, levels=4, color=".2")
         plot.savefig(destination + "Pairplot.png")
         plt.close(plot.fig)
+    
+
+    def generateCorrelationHeatmap(self, columns, destination, size=10):
+        """Generate a heatmap for the correlation matrix
+
+        Args:
+            columns (list[str]): List of variables included in plot
+            destination (str): Destination folder for resulting plot
+            size (int, optional): Figure width and height in inches. Defaults to 10.
+
+        Returns:
+            dataframe: Correlation matrix
+        """
+        fig, ax = plt.subplots(figsize=(size,size))
+        corrMatrix = self.df[columns].corr()
+        heatmap = sns.heatmap(corrMatrix, center=0, annot=True, linewidths=.5, ax=ax)
+        fig.savefig(destination + "Heatmap.png")
+        plt.close(fig)
+        return corrMatrix
 
 
-    def generatePlots(self, destination, columns):
+    def generateRegressionPlot(self, x, y, destination, size=10, style="darkgrid"):
+        sns.set_theme(style=style)
+        plot = sns.jointplot(
+            x=x, y=y,
+            data=self.df, 
+            kind="reg",
+            truncate=False,
+            color="m",
+            height=size
+        )
+        plot.savefig(destination + x + "_" + y + "_regression.png")
+        plt.close(plot.fig)
+        
+
+    def generatePlots(self, columns, destination, heatmap=True, regplot=True, pairplot=False, biplot=True):
         # TODO:
         #   distributions plots (https://seaborn.pydata.org/generated/seaborn.displot.html)                                 Dominik
         #   boxplots (https://seaborn.pydata.org/generated/seaborn.boxplot.html)                                            Marius
         #   violin plots (https://seaborn.pydata.org/generated/seaborn.violinplot.html)                                     Niklas
-        #   corrolation heatmap (https://seaborn.pydata.org/generated/seaborn.heatmap.html)                                 Tristan
-        #   bivariate plots (https://seaborn.pydata.org/examples/layered_bivariate_plot.html)                               Jonas
-        #   pair plots (https://seaborn.pydata.org/generated/seaborn.pairplot.html)                                         Jonas
-        #   linear regression with marginal distributions (https://seaborn.pydata.org/examples/regression_marginals.html)   Dominik
+        #   corrolation heatmap (https://seaborn.pydata.org/generated/seaborn.heatmap.html)                                 Done (Tristan)
+        #   bivariate plots (https://seaborn.pydata.org/examples/layered_bivariate_plot.html)                               Done (Jonas)
+        #   pair plots (https://seaborn.pydata.org/generated/seaborn.pairplot.html)                                         Done (Jonas)
+        #   linear regression with marginal distributions (https://seaborn.pydata.org/examples/regression_marginals.html)   Done (Dominik)
         
-        self.generatePairplot(columns, destination)
+        if heatmap:
+            self.generateCorrelationHeatmap(columns, destination, 12)
+
+        if pairplot:
+            self.generatePairplot(columns, destination)
         
         for col in columns:
             for row in columns:
@@ -136,11 +173,18 @@ class Preprocessor:
                     # TODO: univariate plots
                     pass
                 else:
-                    self.generateBivariatePlot(row, col, destination)
+                    if regplot:
+                        self.generateRegressionPlot(row, col, destination)
+                    if biplot:
+                        self.generateBivariatePlot(row, col, destination)
 
 
     def restrictDaytimeInterval(self, startTime, endTime):
         return self.df.between_time(startTime, endTime)
+
+
+    def normalizeData(self):
+        pass
 
 
     def saveDataframe(self, path):

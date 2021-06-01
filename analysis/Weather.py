@@ -71,7 +71,7 @@ class DarkskyApiDownloader:
         weatherDf = dataUtils.createTimeIndexForDataframe(weatherDf,'time')
 
         if not resampleTime == None: 
-            interploateFloats = ['visibility','windBearing','windGust','windSpeed','temperature','apparentTemperature','cloudCover','dewPoint','humidity','uvIndex']
+            interploateFloats = ['visibility','windBearing','windGust','windSpeed','temperature','apparentTemperature','pressure','cloudCover','dewPoint','humidity','uvIndex']
             weatherDf = weatherDf.resample(resampleTime).mean()
             weatherDf[interploateFloats] = weatherDf[interploateFloats].interpolate(limit=13)
             weatherDf.fillna(method='ffill', inplace=True)
