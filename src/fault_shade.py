@@ -6,11 +6,11 @@ data_sets = [
     plot_simulation.DataFetcherSimulated(r'../Daten_Simuliert/daten_schatten.xls', '2subs_moving shadow', ['Time', 'S', 'T', 'S1', 'P', 'V', 'I'])
 ]
 
-data_sets[0].plot_data()
 data_sets[1].plot_data()
 data_sets[2].plot_data()
 
 plot_simulation.plot_mult(data_sets, 'V', 'I', 'Diodenkennlinie', 'Voltage', 'Current')
+
 
 plot_simulation.plot_mult(data_sets, 'S', 'P', 'Verlauf der Leistung abhängig von der Einstrahlung', 'Irradiance', 'Power')
 plot_simulation.plot_mult(data_sets, 'S', 'V', 'Verlauf der Spannung abhängig von der Einstrahlung', 'Irradiance', 'Voltage')

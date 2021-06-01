@@ -15,7 +15,7 @@ plot_simulation.plot_mult(data_sets, 'V', 'I', 'Diodenkennlinie', 'Voltage', 'Cu
 plot_simulation.plot_mult(data_sets, 'S', 'P', 'Verlauf der Leistung abhängig von der Einstrahlung', 'Irradiance', 'Power')
 plot_simulation.plot_mult(data_sets, 'S', 'V', 'Verlauf der Spannung abhängig von der Einstrahlung', 'Irradiance', 'Voltage')
 plot_simulation.plot_mult(data_sets, 'S', 'I', 'Verlauf des Stromes abhängig von der Einstrahlung', 'Irradiance', 'Current')
-
+print(data_sets[0].info)
 
 plot_simulation.plot_mult(data_sets, 'T1', 'P', 'Verlauf der Leistung abhängig von der Temperatur', 'Temperature', 'Power')
 plot_simulation.plot_mult(data_sets, 'T1', 'V', 'Verlauf der Spannung abhängig von der Temperatur', 'Temperature', 'Voltage')
