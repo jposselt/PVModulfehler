@@ -43,11 +43,11 @@ class Preprocessor:
         lon = str(self.df['Longitude_plant'].iloc[0])
 
         # remove unused columns
-        self.df = self.df[['Time','AcPower','Edaily','Dci','Dcp','Dcu','AnalysisGroup_string']]
+        self.df = self.df[['Time','AcPower','Edaily','Dci','Dcp','Dcu','AnalysisGroup_string','string_id']]
 
         # setup category for east and west orientations
         self.df["AnalysisGroup_string"] = self.df["AnalysisGroup_string"].astype('category')
-        self.df.rename(columns = {'AnalysisGroup_string':'Orientation'}, inplace = True)
+        self.df.rename(columns = {'AnalysisGroup_string':'orientation'}, inplace = True)
 
         # convert time column to DatetimeIndex
         self.df['Time'] = pd.DatetimeIndex(self.df['Time'], dayfirst=True)
@@ -55,15 +55,10 @@ class Preprocessor:
         # make time column the index
         self.df.set_index('Time', inplace=True)
 
-        # setup categories for year, month and day
-        self.df['Year'] = self.df.index.year
-        self.df['Year'].astype('category')
-
-        self.df['Month'] = self.df.index.month
-        self.df['Month'].astype('category')
-
-        self.df['Day'] = self.df.index.day
-        self.df['Day'].astype('category')
+        # create time based columns
+        self.df['minuteOfDay'] = self.df.index.hour * 60 + self.df.index.minute
+        self.df['dayOfYear']   = self.df.index.dayofyear
+        self.df['weekOfYear']  = self.df.index.week
 
         # list all days in dataframe as datetime.datetime objects
         days = self.df.index.normalize().unique().to_pydatetime()
@@ -152,15 +147,6 @@ class Preprocessor:
         
 
     def generatePlots(self, columns, destination, heatmap=True, regplot=True, pairplot=False, biplot=True):
-        # TODO:
-        #   distributions plots (https://seaborn.pydata.org/generated/seaborn.displot.html)                                 Dominik
-        #   boxplots (https://seaborn.pydata.org/generated/seaborn.boxplot.html)                                            Marius
-        #   violin plots (https://seaborn.pydata.org/generated/seaborn.violinplot.html)                                     Niklas
-        #   corrolation heatmap (https://seaborn.pydata.org/generated/seaborn.heatmap.html)                                 Done (Tristan)
-        #   bivariate plots (https://seaborn.pydata.org/examples/layered_bivariate_plot.html)                               Done (Jonas)
-        #   pair plots (https://seaborn.pydata.org/generated/seaborn.pairplot.html)                                         Done (Jonas)
-        #   linear regression with marginal distributions (https://seaborn.pydata.org/examples/regression_marginals.html)   Done (Dominik)
-        
         if heatmap:
             self.generateCorrelationHeatmap(columns, destination, 12)
 
@@ -181,10 +167,6 @@ class Preprocessor:
 
     def restrictDaytimeInterval(self, startTime, endTime):
         return self.df.between_time(startTime, endTime)
-
-
-    def normalizeData(self):
-        pass
 
 
     def saveDataframe(self, path):
