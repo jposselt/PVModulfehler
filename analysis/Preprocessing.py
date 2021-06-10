@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -32,19 +33,15 @@ class Preprocessor:
         self.files, self.df = loadMultipleFilesByPattern(path)
         self.id = ID
 
-    def preprocessData(self):
+    def preprocessData(self, keepColumns):
         """Preprocess and add weather data
+
+        Args:
+            keepColumns (list[str]): Keep these columns at the end.
 
         Returns:
             dataframe: Processed dataframe
         """
-        # extract geographic coordinates
-        lat = str(self.df['Latitude_plant'].iloc[0])
-        lon = str(self.df['Longitude_plant'].iloc[0])
-
-        # remove unused columns
-        self.df = self.df[['Time','AcPower','Edaily','Dci','Dcp','Dcu','AnalysisGroup_string','string_id']]
-
         # setup category for east and west orientations
         self.df["AnalysisGroup_string"] = self.df["AnalysisGroup_string"].astype('category')
         self.df.rename(columns = {'AnalysisGroup_string':'orientation'}, inplace = True)
@@ -56,28 +53,53 @@ class Preprocessor:
         self.df.set_index('Time', inplace=True)
 
         # create time based columns
-        self.df['minuteOfDay'] = self.df.index.hour * 60 + self.df.index.minute
-        self.df['dayOfYear']   = self.df.index.dayofyear
-        self.df['weekOfYear']  = self.df.index.week
+        self.df['minuteOfDay']     = self.df.index.hour * 60 + self.df.index.minute
+        self.df['dayOfYear']       = self.df.index.dayofyear
+        self.df['year']            = self.df.index.year
+        self.df['fracMinuteOfDay'] = self.df['minuteOfDay'] / (60*24)
+        self.df['fracDayOfYear']   = self.df.apply(fracDayOfYear, axis=1)
 
         # list all days in dataframe as datetime.datetime objects
         days = self.df.index.normalize().unique().to_pydatetime()
 
         # download weather reports
+        reports = []
         prefix = "weatherdata_" + self.id + "_"
-        reports = self.darksky.downloadWeatherData(lat, lon, days, self.reportsDir, prefix)
+        if 'Latitude_plant' in self.df.columns and 'Longitude_plant' in self.df.columns:
+            # extract geographic coordinates
+            lat = str(self.df['Latitude_plant'].iloc[0])
+            lon = str(self.df['Longitude_plant'].iloc[0])
+            reports = self.darksky.downloadWeatherData(lat, lon, days, self.reportsDir, prefix)
+        else:
+            print("No location data found. No weather data can be downloaded. There may be existing data, though.")
 
         # combine weather reports
-        dataPrefix="" # prefix for column names
-        weather = self.darksky.combineAndPreprocessWeatherdata(reports, resampleTime='15T', prefix=dataPrefix)
-
-        # remove unused column
-        weather.drop(columns=[dataPrefix + 'Unnamed: 0'], inplace=True)
+        if reports:
+            weather = self.darksky.combineAndPreprocessWeatherdata(reports, resampleTime='15T', prefix="")
+        else:
+            print("Searching for existing weather data.")
+            for day in days:
+                filePath = self.reportsDir + prefix + day.strftime("%Y_%m_%d") + '.csv'
+                if os.path.isfile(filePath):
+                    reports.append(filePath)
+                else:
+                    print("No weather data found for date " + day.strftime("%Y_%m_%d"))
+            weather = self.darksky.combineAndPreprocessWeatherdata(reports, resampleTime='15T', prefix="")
 
         # mergen dataframes
         self.df = pd.merge(self.df, weather, left_index=True, right_index=True)
 
+        # remove columns
+        self.df = self.df[keepColumns]
+
         return self.df
+
+
+    def normalize(self, columns):
+        for col in columns:
+            max_value = self.df[col].max()
+            min_value = self.df[col].min()
+            self.df[col] = (self.df[col] - min_value) / (max_value - min_value)
 
 
     def generateBivariatePlot(self, x, y, destination, size_x=6, size_y=6, style="dark"):
@@ -190,3 +212,13 @@ class Preprocessor:
         """
         store = pd.HDFStore(path)
         return store['df']
+
+def isleap(year):
+    """Return True for leap years, False for non-leap years."""
+    return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)
+
+def fracDayOfYear(row):
+    nDays = 365
+    if isleap(row['year']):
+        nDays = 366
+    return row['dayOfYear'] / nDays
