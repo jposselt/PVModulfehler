@@ -13,7 +13,7 @@ class MLModel:
 
         # Hardcoded model for now
         self.model = Sequential()
-        self.model.add(Dense(7, input_dim=7, activation='sigmoid'))
+        self.model.add(Dense(8, input_dim=8, activation='sigmoid'))
         self.model.add(Dense(14, activation='sigmoid'))
         self.model.add(Dense(7, activation='sigmoid'))
         self.model.add(Dense(1, activation='sigmoid'))
@@ -37,7 +37,7 @@ class MLModel:
             self.testData = test.copy()
 
     def learn(self, trainClass, epochs=30, batch_size=10):
-        if self.trainingData:
+        if not (self.trainingData is None or self.trainingData.empty):
             # Split class from training data
             train_X = self.trainingData.drop(columns=[trainClass]) #Input
             train_Y = self.trainingData[trainClass]                #Class
@@ -47,7 +47,7 @@ class MLModel:
             self.history = self.model.fit(train_X, train_Y, epochs=epochs, batch_size=batch_size)
 
     def evaluate(self, trainClass):
-        if self.testData:
+        if not (self.testData is None or self.testData.empty):
             # Split class from test data
             test_X = self.testData.drop(columns=[trainClass]) #Input
             test_Y = self.testData[trainClass]                #Class
