@@ -6,20 +6,24 @@ import pandas as pd
 
 
 class MLModel:
-    def __init__(self):
+    def __init__(self, inputDim, layers, activation='sigmoid', loss='mean_squared_error', optimizer='sgd', metrics=['mse', 'mae', 'mape', 'cosine','acc']):
         self.trainingData = None
         self.testData = None
         self.history = None
 
         # Hardcoded model for now
         self.model = Sequential()
-        self.model.add(Dense(8, input_dim=8, activation='sigmoid'))
-        self.model.add(Dense(14, activation='sigmoid'))
-        self.model.add(Dense(7, activation='sigmoid'))
-        self.model.add(Dense(1, activation='sigmoid'))
+
+        layerCount = 0
+        for units in layers:
+            if layerCount == 0:
+                self.model.add(Dense(units, input_dim=inputDim, activation=activation))
+            else:
+                self.model.add(Dense(units, activation=activation))
+            layerCount += 1
         
         # Compile model
-        self.model.compile(loss='mean_squared_error', optimizer='sgd',metrics=['mse', 'mae', 'mape', 'cosine','acc'])
+        self.model.compile(loss=loss, optimizer=optimizer, metrics=metrics)
 
         self.scaler = MinMaxScaler()
 
@@ -36,21 +40,21 @@ class MLModel:
         else:
             self.testData = test.copy()
 
-    def learn(self, trainClass, epochs=30, batch_size=10):
+    def learn(self, trainColumns, epochs=30, batch_size=10):
         if not (self.trainingData is None or self.trainingData.empty):
             # Split class from training data
-            train_X = self.trainingData.drop(columns=[trainClass]) #Input
-            train_Y = self.trainingData[trainClass]                #Class
+            train_X = self.trainingData.drop(columns=trainColumns) #Input
+            train_Y = self.trainingData[trainColumns]              #Class
 
             train_X = self.scaler.fit_transform(train_X)
         
             self.history = self.model.fit(train_X, train_Y, epochs=epochs, batch_size=batch_size)
 
-    def evaluate(self, trainClass):
+    def evaluate(self, trainColumns):
         if not (self.testData is None or self.testData.empty):
             # Split class from test data
-            test_X = self.testData.drop(columns=[trainClass]) #Input
-            test_Y = self.testData[trainClass]                #Class
+            test_X = self.testData.drop(columns=trainColumns) #Input
+            test_Y = self.testData[trainColumns]              #Class
 
             test_X = self.scaler.fit_transform(test_X)
 
