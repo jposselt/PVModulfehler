@@ -64,7 +64,7 @@ class MLModel:
 
             test_X = self.scaler.fit_transform(test_X)
 
-            self.model.evaluate(test_X,test_Y)
+            return self.model.evaluate(test_X,test_Y)
 
     def save(self):
         pass
