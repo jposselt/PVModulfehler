@@ -1,5 +1,6 @@
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
+from tensorflow.keras.layers import Dropout
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 import pandas as pd
@@ -18,8 +19,13 @@ class MLModel:
         for units in layers:
             if layerCount == 0:
                 self.model.add(Dense(units, input_dim=inputDim, activation=activation))
+                self.model.add(Dropout(0.2))
             else:
-                self.model.add(Dense(units, activation=activation))
+                if layerCount == (len(layers) - 1):
+                    self.model.add(Dense(units, activation='sigmoid'))
+                else:
+                    self.model.add(Dense(units, activation=activation))
+                    self.model.add(Dropout(0.2))
             layerCount += 1
         
         # Compile model
