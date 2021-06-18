@@ -38,30 +38,6 @@ configs = [
         "optimizer": "adam",
         "output": "97a5f5a925c86b5b442f874d0760f6cb_8-16-5-1_relu_adam"
     },
-
-    {
-        "data": df_sample,
-        "layers": [8, 16, 5, 1],
-        "activation": "sigmoid",
-        "optimizer": "adam",
-        "output": "97a5f5a925c86b5b442f874d0760f6cb_8-16-5-1_sigmoid_adam"
-    },
-
-    {
-        "data": df_sample,
-        "layers": [8, 16, 5, 1],
-        "activation": "relu",
-        "optimizer": "sgd",
-        "output": "97a5f5a925c86b5b442f874d0760f6cb_8-16-5-1_relu_sgd"
-    },
-
-    {
-        "data": df_sample,
-        "layers": [16, 32, 16, 8, 4, 1],
-        "activation": "relu",
-        "optimizer": "adam",
-        "output": "97a5f5a925c86b5b442f874d0760f6cb_16-32-16-8-4-1_relu_adam"
-    },
 ]
 
 predictColumns = ['defect']
@@ -82,7 +58,7 @@ for config in configs:
     model.addData(config["data"], 0.3, 42)
 
     # Train model
-    model.learn(predictColumns, epochs=2)
+    model.learn(predictColumns, epochs=200)
 
     # Evaluate model
     f = open("./data/ml_plots/" + config["output"] + ".txt", "w")

@@ -66,8 +66,3 @@ class MLModel:
 
             return self.model.evaluate(test_X,test_Y)
 
-    def save(self):
-        pass
-
-    def load(self):
-        pass
