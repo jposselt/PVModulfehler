@@ -135,7 +135,7 @@ class Preprocessor:
         plt.close(plot.fig)
     
 
-    def generateCorrelationHeatmap(self, columns, destination, size=10):
+    def generateCorrelationHeatmap(self, columns, destination, xsize=10, ysize=10):
         """Generate a heatmap for the correlation matrix
 
         Args:
@@ -146,7 +146,8 @@ class Preprocessor:
         Returns:
             dataframe: Correlation matrix
         """
-        fig, ax = plt.subplots(figsize=(size,size))
+        sns.set(font_scale=1.4)
+        fig, ax = plt.subplots(figsize=(xsize,ysize))
         corrMatrix = self.df[columns].corr()
         heatmap = sns.heatmap(corrMatrix, center=0, annot=True, linewidths=.5, ax=ax)
         fig.savefig(destination + "Heatmap.png")
@@ -170,7 +171,7 @@ class Preprocessor:
 
     def generatePlots(self, columns, destination, heatmap=True, regplot=True, pairplot=False, biplot=True):
         if heatmap:
-            self.generateCorrelationHeatmap(columns, destination, 12)
+            self.generateCorrelationHeatmap(columns, destination, 12, 12)
 
         if pairplot:
             self.generatePairplot(columns, destination)

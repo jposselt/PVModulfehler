@@ -7,12 +7,11 @@ import pandas as pd
 
 
 class MLModel:
-    def __init__(self, inputDim, layers, activation='sigmoid', loss='mean_squared_error', optimizer='sgd', metrics=['mse', 'mae', 'mape', 'cosine','acc']):
+    def __init__(self, inputDim, layers, activation='sigmoid', loss='mean_squared_error', optimizer='sgd', metrics=['mse','acc']):
         self.trainingData = None
         self.testData = None
         self.history = None
 
-        # Hardcoded model for now
         self.model = Sequential()
 
         layerCount = 0
@@ -65,4 +64,3 @@ class MLModel:
             test_X = self.scaler.fit_transform(test_X)
 
             return self.model.evaluate(test_X,test_Y)
-
