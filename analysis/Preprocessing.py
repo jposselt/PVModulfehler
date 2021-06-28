@@ -101,9 +101,20 @@ class Preprocessor:
         sns.scatterplot(x=x, y=y, data=self.df)
         sns.histplot(x=x, y=y, data=self.df, bins=50, pthresh=.1, cmap="mako")
         sns.kdeplot(x=x, y=y, data=self.df, levels=5, color="w", linewidths=1)
-        fig.savefig(destination + x + "_" + y + ".png")
+        plt.savefig(destination + x + "_" + y + ".png")
         plt.close(fig)
 
+    def generateBoxplot(self, columns, destination):
+        """Generate simple plot of probability distribution in a dataset.
+
+        Args:
+            columns (list[str]): List of columns included in plot
+            destination (str): Destination folder for resluting plot
+        """
+        for column in columns:
+            sns.boxplot(self.df[column])
+            plt.savefig(destination + column + ".Boxplot.png")
+            plt.close()
 
     def generatePairplot(self, columns, destination):
         """Generate plot of pairwise relationships in a dataset.
@@ -128,6 +139,7 @@ class Preprocessor:
         #   pair plots (https://seaborn.pydata.org/generated/seaborn.pairplot.html)                                         Jonas
         #   linear regression with marginal distributions (https://seaborn.pydata.org/examples/regression_marginals.html)   Dominik
         
+        self.generateBoxplot(columns, destination)
         self.generatePairplot(columns, destination)
         
         for col in columns:
