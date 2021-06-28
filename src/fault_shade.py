@@ -1,3 +1,12 @@
+"""
+"  python script to analyse simulated data.
+"  This script used the functionality defined in plot_simulation.
+"  It plots the data generated to simulate the fault "shade".
+"  Graphics will be stored in data/plots
+"  Script: fault_shade.py
+"  Version: 1.1
+"""
+
 import plot_simulation
 
 data_sets = [
