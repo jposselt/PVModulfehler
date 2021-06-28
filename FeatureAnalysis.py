@@ -12,4 +12,4 @@ pre.loadFilesByPattern("../../PVDaten/Real/LimesysDataParsedTmp/1/*.csv", "1")
 # Execute preprocessing
 columns = ['Edaily','AcPower','Dcp','Dci','Dcu','temperature','pressure','dewPoint','humidity','cloudCover','visibility','uvIndex','windBearing','windSpeed','precipIntensity']
 pre.preprocessData(columns)
-pre.generatePlots(columns, "./data/plots/", pairplot=True)
+pre.generatePlots(columns, "./data/plots/", heatmap=True, pairplot=False, regplot=False, biplot=False)

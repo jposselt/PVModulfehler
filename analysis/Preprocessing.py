@@ -96,6 +96,11 @@ class Preprocessor:
 
 
     def normalize(self, columns):
+        """Normalize data columns
+
+        Args:
+            columns (list[sting]): Data columns to normalize
+        """
         for col in columns:
             max_value = self.df[col].max()
             min_value = self.df[col].min()
@@ -156,6 +161,15 @@ class Preprocessor:
 
 
     def generateRegressionPlot(self, x, y, destination, size=10, style="darkgrid"):
+        """Generate regression plot
+
+        Args:
+            x (string): Data columns used as x-axis
+            y (string): Data columns used as y-axis
+            destination (string): Destination folder for resulting plot
+            size (int, optional): Size of the generated plot in inches. Defaults to 10.
+            style (str, optional): Style of the generated plot. Defaults to "darkgrid".
+        """
         sns.set_theme(style=style)
         plot = sns.jointplot(
             x=x, y=y,
@@ -170,6 +184,16 @@ class Preprocessor:
         
 
     def generatePlots(self, columns, destination, heatmap=True, regplot=True, pairplot=False, biplot=True):
+        """Generate various plots illustrating relationsships between data columns
+
+        Args:
+            columns (list[string]): List of data columns to use
+            destination (string): Path to folder for resulting plots
+            heatmap (bool, optional): Generate a heatmap of correlation coefficients. Defaults to True.
+            regplot (bool, optional): Generate regression plots. Defaults to True.
+            pairplot (bool, optional): Generate matrix of pair plots. Defaults to False.
+            biplot (bool, optional): Generate bivariate distribution plots. Defaults to True.
+        """
         if heatmap:
             self.generateCorrelationHeatmap(columns, destination, 12, 12)
 
@@ -189,6 +213,15 @@ class Preprocessor:
 
 
     def restrictDaytimeInterval(self, startTime, endTime):
+        """Restrict data to certain daytime hours
+
+        Args:
+            startTime (datetime.time or str): Initial time as a time filter limit
+            endTime (datetime.time or str): End time as a time filter limit
+
+        Returns:
+            dataframe: restricted dataframe
+        """
         return self.df.between_time(startTime, endTime)
 
 
@@ -215,10 +248,25 @@ class Preprocessor:
         return store['df']
 
 def isleap(year):
-    """Return True for leap years, False for non-leap years."""
+    """Check leap year
+
+    Args:
+        year (int): Year
+
+    Returns:
+        bool: True if input is a leap year
+    """
     return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)
 
 def fracDayOfYear(row):
+    """Calculate fractional day of year
+
+    Args:
+        row (?): Dataframe row
+
+    Returns:
+        float: fractional day of year
+    """
     nDays = 365
     if isleap(row['year']):
         nDays = 366

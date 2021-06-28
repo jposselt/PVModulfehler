@@ -1,6 +1,11 @@
+# Train neural networks
+
+import sys
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import utils.aiUtils as aiUtils
 from analysis.MachineLearning import MLModel
 
 from IPython.display import display
@@ -33,10 +38,50 @@ df_sample_noon = pd.concat([df_sample_true, df_sample_false])
 configs = [
     {
         "data": df_sample,
-        "layers": [8, 16, 8, 4, 2, 1],
+        "layers": [8, 16, 5, 1],
         "activation": "relu",
-        "optimizer": "RMSprop",
-        "output": "97a5f5a925c86b5b442f874d0760f6cb_8-16-8-4-2-1_relu_RMSprop"
+        "optimizer": "adam",
+        "output": "97a5f5a925c86b5b442f874d0760f6cb_8-16-5-1_relu_adam"
+    },
+
+    {
+        "data": df_sample,
+        "layers": [8, 16, 5, 1],
+        "activation": "sigmoid",
+        "optimizer": "adam",
+        "output": "97a5f5a925c86b5b442f874d0760f6cb_8-16-5-1_sigmoid_adam"
+    },
+
+    {
+        "data": df_sample,
+        "layers": [8, 16, 5, 1],
+        "activation": "relu",
+        "optimizer": "sgd",
+        "output": "97a5f5a925c86b5b442f874d0760f6cb_8-16-5-1_relu_sgd"
+    },
+
+    {
+        "data": df_sample,
+        "layers": [16, 32, 16, 8, 4, 1],
+        "activation": "relu",
+        "optimizer": "adam",
+        "output": "97a5f5a925c86b5b442f874d0760f6cb_16-32-16-8-4-1_relu_adam"
+    },
+
+    {
+        "data": df_sample_noon,
+        "layers": [8, 16, 5, 1],
+        "activation": "relu",
+        "optimizer": "adam",
+        "output": "97a5f5a925c86b5b442f874d0760f6cb_8-16-5-1_relu_adam_noon"
+    },
+
+    {
+        "data": df,
+        "layers": [16, 32, 16, 8, 4, 1],
+        "activation": "relu",
+        "optimizer": "adam",
+        "output": "97a5f5a925c86b5b442f874d0760f6cb_16-32-16-8-4-1_relu_adam_full"
     },
 ]
 
@@ -58,14 +103,12 @@ for config in configs:
     model.addData(config["data"], 0.3, 42)
 
     # Train model
-    model.learn(predictColumns, epochs=200)
+    model.learn(predictColumns, epochs=100)
 
     # Model summary
     model.model.summary()
 
     # Evaluate model
-    np.set_printoptions(formatter={'float': lambda x: "{0:0.6f}".format(x)})
-    predictedY = model.predict(lstmX_test)
     stdout = sys.stdout
 
     f = open("./data/ml_plots/" + config["output"] + ".txt", "w")
@@ -75,8 +118,7 @@ for config in configs:
 
     f.write("\n")
     f.write(str(model.model.metrics_names) + "\n")
-    f.write(str(model.evaluate(lstmX_test,lstmY_test)) + "\n\n")
-    f.write(str(aiUtils.fullMetrics(lstmY_test,predictedY)))
+    f.write(str(model.evaluate(predictColumns)))
     f.close()
 
     # Plot training history

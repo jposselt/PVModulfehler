@@ -1,3 +1,6 @@
+# This script processes set of initial data files, prunes unnecessary columns and merges weather information.
+# The results are stored in CSV files (one for each set of files)
+
 from glob import glob
 import pandas as pd
 from analysis.Preprocessing import Preprocessor
@@ -19,6 +22,8 @@ del dataframes
 del df_faults
 
 # List of datasets
+# NOTE: If you are processing cleaned data (from the LimesysDataCleanedTmp folder) the required weather reports must already be present in
+# the folder given to the Preprocessor below since these data files do not contain location coordinates.
 datasets = [
     ["../../PVDaten/Real/LimesysDataCleanedTmp/425987/*_97a5f5a925c86b5b442f874d0760f6cb.csv", "425987", "97a5f5a925c86b5b442f874d0760f6cb"],
     ["../../PVDaten/Real/LimesysDataCleanedTmp/425987/*_5523c761d21ce723767657c8615d6d23.csv", "425987", "5523c761d21ce723767657c8615d6d23"],
@@ -41,7 +46,7 @@ for ds in datasets:
     pre.loadFilesByPattern(path, ID)
 
     # Execute preprocessing
-    columns = ['Dci','Dcu','temperature','humidity','cloudCover','uvIndex','fracMinuteOfDay','fracDayOfYear','orientation','string_id']
+    columns = ['Dci','Dcu','temperature','humidity','cloudCover','uvIndex','minuteOfDay','fracMinuteOfDay','fracDayOfYear','orientation','string_id']
     pre.preprocessData(columns)
     pre.normalize(['temperature','humidity','cloudCover','uvIndex'])
 
