@@ -45,7 +45,7 @@ class MLModel:
         self.scaler = MinMaxScaler()
 
     def addData(self, data, test_size, random_state):
-        """Add data to the model
+        """Sets up dataset for neuronal network
 
         Args:
             data (dataframe): Data used for training/testing
@@ -66,7 +66,7 @@ class MLModel:
             self.testData = test.copy()
 
     def learn(self, trainColumns, epochs=30, batch_size=10):
-        """Train the model
+        """Specifies the learning parameters and trains the model
 
         Args:
             trainColumns (string): Data column the model should predict.
@@ -90,6 +90,7 @@ class MLModel:
 
         Returns:
             [?]: Scalar test loss or list of scalars
+
         """
         if not (self.testData is None or self.testData.empty):
             # Split class from test data
