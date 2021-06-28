@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -32,22 +33,18 @@ class Preprocessor:
         self.files, self.df = loadMultipleFilesByPattern(path)
         self.id = ID
 
-    def preprocessData(self):
+    def preprocessData(self, keepColumns):
         """Preprocess and add weather data
+
+        Args:
+            keepColumns (list[str]): Keep these columns at the end.
 
         Returns:
             dataframe: Processed dataframe
         """
-        # extract geographic coordinates
-        lat = str(self.df['Latitude_plant'].iloc[0])
-        lon = str(self.df['Longitude_plant'].iloc[0])
-
-        # remove unused columns
-        self.df = self.df[['Time','AcPower','Edaily','Dci','Dcp','Dcu','AnalysisGroup_string']]
-
         # setup category for east and west orientations
         self.df["AnalysisGroup_string"] = self.df["AnalysisGroup_string"].astype('category')
-        self.df.rename(columns = {'AnalysisGroup_string':'Orientation'}, inplace = True)
+        self.df.rename(columns = {'AnalysisGroup_string':'orientation'}, inplace = True)
 
         # convert time column to DatetimeIndex
         self.df['Time'] = pd.DatetimeIndex(self.df['Time'], dayfirst=True)
@@ -55,34 +52,54 @@ class Preprocessor:
         # make time column the index
         self.df.set_index('Time', inplace=True)
 
-        # setup categories for year, month and day
-        self.df['Year'] = self.df.index.year
-        self.df['Year'].astype('category')
-
-        self.df['Month'] = self.df.index.month
-        self.df['Month'].astype('category')
-
-        self.df['Day'] = self.df.index.day
-        self.df['Day'].astype('category')
+        # create time based columns
+        self.df['minuteOfDay']     = self.df.index.hour * 60 + self.df.index.minute
+        self.df['dayOfYear']       = self.df.index.dayofyear
+        self.df['year']            = self.df.index.year
+        self.df['fracMinuteOfDay'] = self.df['minuteOfDay'] / (60*24)
+        self.df['fracDayOfYear']   = self.df.apply(fracDayOfYear, axis=1)
 
         # list all days in dataframe as datetime.datetime objects
         days = self.df.index.normalize().unique().to_pydatetime()
 
         # download weather reports
+        reports = []
         prefix = "weatherdata_" + self.id + "_"
-        reports = self.darksky.downloadWeatherData(lat, lon, days, self.reportsDir, prefix)
+        if 'Latitude_plant' in self.df.columns and 'Longitude_plant' in self.df.columns:
+            # extract geographic coordinates
+            lat = str(self.df['Latitude_plant'].iloc[0])
+            lon = str(self.df['Longitude_plant'].iloc[0])
+            reports = self.darksky.downloadWeatherData(lat, lon, days, self.reportsDir, prefix)
+        else:
+            print("No location data found. No weather data can be downloaded. There may be existing data, though.")
 
         # combine weather reports
-        dataPrefix="" # prefix for column names
-        weather = self.darksky.combineAndPreprocessWeatherdata(reports, resampleTime='15T', prefix=dataPrefix)
-
-        # remove unused column
-        weather.drop(columns=[dataPrefix + 'Unnamed: 0'], inplace=True)
+        if reports:
+            weather = self.darksky.combineAndPreprocessWeatherdata(reports, resampleTime='15T', prefix="")
+        else:
+            print("Searching for existing weather data.")
+            for day in days:
+                filePath = self.reportsDir + prefix + day.strftime("%Y_%m_%d") + '.csv'
+                if os.path.isfile(filePath):
+                    reports.append(filePath)
+                else:
+                    print("No weather data found for date " + day.strftime("%Y_%m_%d"))
+            weather = self.darksky.combineAndPreprocessWeatherdata(reports, resampleTime='15T', prefix="")
 
         # mergen dataframes
         self.df = pd.merge(self.df, weather, left_index=True, right_index=True)
 
+        # remove columns
+        self.df = self.df[keepColumns]
+
         return self.df
+
+
+    def normalize(self, columns):
+        for col in columns:
+            max_value = self.df[col].max()
+            min_value = self.df[col].min()
+            self.df[col] = (self.df[col] - min_value) / (max_value - min_value)
 
 
     def generateBivariatePlot(self, x, y, destination, size_x=6, size_y=6, style="dark"):
@@ -91,7 +108,7 @@ class Preprocessor:
         Args:
             x (str): Variables that specifies positions on the x axes.
             y (str): Variables that specifies positions on the y axes.
-            destination (str): Destination folder for resluting plot
+            destination (str): Destination folder for resulting plot
             size_x (int, optional): Figure width in inches. Defaults to 6.
             size_y (int, optional): Figure height in inches. Defaults to 6.
             style (str, optional): Style option passed to seaborn. Defaults to "dark".
@@ -120,24 +137,47 @@ class Preprocessor:
         """Generate plot of pairwise relationships in a dataset.
 
         Args:
-            columns (list[str]): List of columns included in plot
-            destination (str): Destination folder for resluting plot
+            columns (list[str]): List of variables included in plot
+            destination (str): Destination folder for resulting plot
         """
         plot = sns.pairplot(self.df[columns], diag_kind="kde")
         plot.map_lower(sns.kdeplot, levels=4, color=".2")
         plot.savefig(destination + "Pairplot.png")
         plt.close(plot.fig)
+    
+
+    def generateCorrelationHeatmap(self, columns, destination, xsize=10, ysize=10):
+        """Generate a heatmap for the correlation matrix
+
+        Args:
+            columns (list[str]): List of variables included in plot
+            destination (str): Destination folder for resulting plot
+            size (int, optional): Figure width and height in inches. Defaults to 10.
+
+        Returns:
+            dataframe: Correlation matrix
+        """
+        sns.set(font_scale=1.4)
+        fig, ax = plt.subplots(figsize=(xsize,ysize))
+        corrMatrix = self.df[columns].corr()
+        heatmap = sns.heatmap(corrMatrix, center=0, annot=True, linewidths=.5, ax=ax)
+        fig.savefig(destination + "Heatmap.png")
+        plt.close(fig)
+        return corrMatrix
 
 
-    def generatePlots(self, destination, columns):
-        # TODO:
-        #   distributions plots (https://seaborn.pydata.org/generated/seaborn.displot.html)                                 Dominik
-        #   boxplots (https://seaborn.pydata.org/generated/seaborn.boxplot.html)                                            Marius
-        #   violin plots (https://seaborn.pydata.org/generated/seaborn.violinplot.html)                                     Niklas
-        #   corrolation heatmap (https://seaborn.pydata.org/generated/seaborn.heatmap.html)                                 Tristan
-        #   bivariate plots (https://seaborn.pydata.org/examples/layered_bivariate_plot.html)                               Jonas
-        #   pair plots (https://seaborn.pydata.org/generated/seaborn.pairplot.html)                                         Jonas
-        #   linear regression with marginal distributions (https://seaborn.pydata.org/examples/regression_marginals.html)   Dominik
+    def generateRegressionPlot(self, x, y, destination, size=10, style="darkgrid"):
+        sns.set_theme(style=style)
+        plot = sns.jointplot(
+            x=x, y=y,
+            data=self.df, 
+            kind="reg",
+            truncate=False,
+            color="m",
+            height=size
+        )
+        plot.savefig(destination + x + "_" + y + "_regression.png")
+        plt.close(plot.fig)
         
         self.generateBoxplot(columns, destination)
         self.generatePairplot(columns, destination)
@@ -148,7 +188,10 @@ class Preprocessor:
                     # TODO: univariate plots
                     pass
                 else:
-                    self.generateBivariatePlot(row, col, destination)
+                    if regplot:
+                        self.generateRegressionPlot(row, col, destination)
+                    if biplot:
+                        self.generateBivariatePlot(row, col, destination)
 
 
     def restrictDaytimeInterval(self, startTime, endTime):
@@ -176,3 +219,13 @@ class Preprocessor:
         """
         store = pd.HDFStore(path)
         return store['df']
+
+def isleap(year):
+    """Return True for leap years, False for non-leap years."""
+    return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)
+
+def fracDayOfYear(row):
+    nDays = 365
+    if isleap(row['year']):
+        nDays = 366
+    return row['dayOfYear'] / nDays

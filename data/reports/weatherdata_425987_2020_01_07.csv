@@ -1,0 +1,25 @@
+,apparentTemperature,cloudCover,dewPoint,humidity,icon,ozone,precipIntensity,precipProbability,precipType,pressure,summary,temperature,time,uvIndex,visibility,windBearing,windGust,windSpeed
+0,-2.03,0.7,-1.22,0.84,partly-cloudy-night,331.9,0.0,0.0,,1025.2,Überwiegend bewölkt,1.15,1578351600,0,16.093,204,9.96,2.9
+1,-1.27,0.58,-0.12,0.89,partly-cloudy-night,341.1,0.0,0.0,,1025.6,Leicht bewölkt,1.49,1578355200,0,16.093,197,9.53,2.52
+2,-1.21,0.54,-0.2,0.89,partly-cloudy-night,355.7,0.0,0.0,,1025.9,Leicht bewölkt,1.39,1578358800,0,16.093,199,8.47,2.34
+3,-1.15,0.72,-0.49,0.88,partly-cloudy-night,373.1,0.0083,0.01,rain,1025.6,Überwiegend bewölkt,1.25,1578362400,0,16.093,203,6.8,2.13
+4,-0.75,0.76,-0.46,0.88,partly-cloudy-night,382.8,0.058,0.06,rain,1025.7,Überwiegend bewölkt,1.37,1578366000,0,16.093,216,5.39,1.91
+5,-0.34,0.8,-0.03,0.88,partly-cloudy-night,377.5,0.0158,0.05,rain,1026.0,Überwiegend bewölkt,1.71,1578369600,0,16.093,218,4.45,1.89
+6,0.16,0.86,0.76,0.9,partly-cloudy-night,364.4,0.0377,0.08,rain,1026.5,Überwiegend bewölkt,2.16,1578373200,0,16.093,223,3.76,1.91
+7,0.54,0.87,1.54,0.93,partly-cloudy-night,354.7,0.0174,0.06,rain,1027.1,Überwiegend bewölkt,2.58,1578376800,0,16.093,223,4.85,2.01
+8,0.72,0.81,1.89,0.94,partly-cloudy-night,351.5,0.0052,0.04,rain,1027.9,Überwiegend bewölkt,2.76,1578380400,0,16.093,228,5.12,2.03
+9,1.0,0.77,2.02,0.94,partly-cloudy-day,350.8,0.0,0.0,,1028.7,Überwiegend bewölkt,2.93,1578384000,0,16.093,229,5.54,1.96
+10,1.55,0.87,2.13,0.91,partly-cloudy-day,349.6,0.0,0.0,,1029.3,Überwiegend bewölkt,3.46,1578387600,0,16.093,230,5.71,2.03
+11,2.47,0.85,2.63,0.88,partly-cloudy-day,347.0,0.0,0.0,,1030.0,Überwiegend bewölkt,4.38,1578391200,0,16.093,229,5.22,2.17
+12,3.78,0.78,3.33,0.85,partly-cloudy-day,343.7,0.0,0.0,,1030.1,Überwiegend bewölkt,5.72,1578394800,1,16.093,227,4.48,2.46
+13,5.34,0.7,4.11,0.82,partly-cloudy-day,349.8,0.0,0.0,,1030.5,Überwiegend bewölkt,7.03,1578398400,1,16.093,216,4.54,2.47
+14,5.69,0.72,4.11,0.79,partly-cloudy-day,345.7,0.0,0.0,,1030.5,Überwiegend bewölkt,7.43,1578402000,0,16.093,221,5.4,2.61
+15,5.35,0.67,3.77,0.79,partly-cloudy-day,340.0,0.0,0.0,,1030.2,Überwiegend bewölkt,7.18,1578405600,0,16.093,227,6.71,2.68
+16,4.2,0.6,3.31,0.83,partly-cloudy-day,334.5,0.0,0.0,,1030.2,Überwiegend bewölkt,6.06,1578409200,0,16.093,227,7.32,2.45
+17,3.69,0.56,2.96,0.84,partly-cloudy-night,329.7,0.0,0.0,,1030.5,Leicht bewölkt,5.46,1578412800,0,16.093,216,6.38,2.21
+18,3.16,0.54,2.48,0.84,partly-cloudy-night,325.1,0.0,0.0,,1030.8,Leicht bewölkt,4.87,1578416400,0,16.093,205,4.75,2.05
+19,2.9,0.65,2.91,0.89,partly-cloudy-night,314.9,0.0,0.0,,1031.0,Überwiegend bewölkt,4.61,1578420000,0,16.093,191,3.42,2.02
+20,2.32,0.61,2.71,0.9,partly-cloudy-night,311.3,0.0,0.0,,1030.8,Überwiegend bewölkt,4.15,1578423600,0,16.093,188,4.4,2.06
+21,1.6,0.6,2.19,0.91,partly-cloudy-night,308.9,0.0,0.0,,1030.3,Überwiegend bewölkt,3.58,1578427200,0,16.093,196,6.28,2.1
+22,1.08,0.57,1.7,0.9,partly-cloudy-night,306.9,0.0,0.0,,1029.9,Leicht bewölkt,3.13,1578430800,0,16.093,200,7.63,2.1
+23,1.0,0.66,1.27,0.88,partly-cloudy-night,304.7,0.0,0.0,,1029.7,Überwiegend bewölkt,2.99,1578434400,0,16.093,206,7.72,2.03
