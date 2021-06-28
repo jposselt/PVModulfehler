@@ -35,9 +35,11 @@ WEATHER_API_URL_BASE = "https://api.darksky.net/forecast/"
 WEATHER_API_KEY = "799038c4e3522036d1ab6f8c64bb79b5"
 WEATHER_API_ADDS = "?lang=de&units=si"
 
-# Minden Campus
+# Minden Campus Koordinaten
 lat = "52.296449"
 lon = "8.904943"
+
+# Datum der Analyse als Unix-Zeitstempel
 date = datetime.datetime(2018, 8, 2)
 timestamp = dateToUnixTime(date)
 display(timestamp)
@@ -50,11 +52,11 @@ request = requests.get(completeApiUrl)
 response = json.loads(request.text)
 
 #===========================================================================================================
-#%% Wetterdaten als Dataframe.
+#%% Wetterdaten als 2D Pandas Dataframe
 weatherAsDataframe = pd.DataFrame(response['hourly']['data'])
 
 #===========================================================================================================
-#%% Unix time in Datetime umwandeln
+#%% Unix-Zeitstempel in Datetime umwandeln
 weatherAsDataframe['time'] = pd.to_datetime(weatherAsDataframe['time'],unit='s')
 
 #===========================================================================================================
