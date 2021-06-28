@@ -7,6 +7,9 @@ import pandas as pd
 
 
 class MLModel:
+    """
+    Class for creatitng a LSTM-neuronal network
+    """
     def __init__(self, inputDim, layers, activation='sigmoid', loss='mean_squared_error', optimizer='sgd', metrics=['mse','acc']):
         self.trainingData = None
         self.testData = None
@@ -33,6 +36,14 @@ class MLModel:
         self.scaler = MinMaxScaler()
 
     def addData(self, data, test_size, random_state):
+        """Sets up dataset for neuronal network
+
+        Parameters
+        ----------
+        data: dataset
+        test_size: test size of dataset for training validation
+        random_state: Controls the shuffling applied to the data before applying the split
+        """
         train, test = train_test_split(data, test_size=test_size, random_state=random_state)
 
         if self.trainingData:
@@ -46,6 +57,15 @@ class MLModel:
             self.testData = test.copy()
 
     def learn(self, trainColumns, epochs=30, batch_size=10):
+        """Specifies the learning parameters and trains the model
+
+        Parameters
+        ----------
+        trainColumns: features to train model with
+        epochs: number of epochs over which model is trained
+        batch_size: batch size of training data
+        """
+            
         if not (self.trainingData is None or self.trainingData.empty):
             # Split class from training data
             train_X = self.trainingData.drop(columns=trainColumns) #Input
@@ -56,6 +76,16 @@ class MLModel:
             self.history = self.model.fit(train_X, train_Y, epochs=epochs, batch_size=batch_size)
 
     def evaluate(self, trainColumns):
+        """Evaluates trained model based on test set
+
+        Parameters
+        ----------
+        trainColumns : features to train model with
+
+        return
+        ----------
+        evaluation of model
+        """
         if not (self.testData is None or self.testData.empty):
             # Split class from test data
             test_X = self.testData.drop(columns=trainColumns) #Input
