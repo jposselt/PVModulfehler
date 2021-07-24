@@ -141,3 +141,4 @@ dmypy.json
 data/plots/
 data/ml_plots/
 data/dataframes/
+data/reports/

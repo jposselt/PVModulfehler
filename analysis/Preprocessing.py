@@ -166,6 +166,8 @@ class Preprocessor:
         fig, ax = plt.subplots(figsize=(xsize,ysize))
         corrMatrix = self.df[columns].corr()
         heatmap = sns.heatmap(corrMatrix, center=0, annot=True, linewidths=.5, ax=ax)
+        heatmap.set_xticklabels(heatmap.get_xticklabels(), rotation = 30, fontsize = 20)
+        heatmap.set_yticklabels(heatmap.get_yticklabels(), rotation = 0,  fontsize = 20)
         fig.savefig(destination + "Heatmap.png")
         plt.close(fig)
         return corrMatrix
@@ -206,7 +208,7 @@ class Preprocessor:
             biplot (bool, optional): Generate bivariate distribution plots. Defaults to True.
         """
         if heatmap:
-            self.generateCorrelationHeatmap(columns, destination, 12, 12)
+            self.generateCorrelationHeatmap(columns, destination, 20, 12)
 
         if pairplot:
             self.generatePairplot(columns, destination)

@@ -10,7 +10,7 @@ faultsFiles = glob("../../PVDaten/Real/LimesysAnalyzeOutput/faultsCompact_*finis
 dataframes = []
 for f in faultsFiles:
     df = pd.read_csv(f)
-    df = df[ (df['plantId'] == 425987) |  (df['plantId'] == 622592) ][['plantId', 'start', 'end', 'stringid']]
+    df = df[ (df['plantId'] == 425987) |  (df['plantId'] == 622592) |  (df['plantId'] == 1081347) ][['plantId', 'start', 'end', 'stringid']]
     dataframes.append(df)
 df_faults = pd.concat(dataframes)
 df_faults.reset_index()
@@ -30,7 +30,8 @@ datasets = [
     ["../../PVDaten/Real/LimesysDataCleanedTmp/622592/*_3f0162177a632253103ac85db40b4f23.csv", "622592", "3f0162177a632253103ac85db40b4f23"], 
     ["../../PVDaten/Real/LimesysDataCleanedTmp/622592/*_26a797f92bb1b509d8592dbded8caabc.csv", "622592", "26a797f92bb1b509d8592dbded8caabc"], 
     ["../../PVDaten/Real/LimesysDataCleanedTmp/622592/*_48a28befcb11c72435d8f44f435d5ad0.csv", "622592", "48a28befcb11c72435d8f44f435d5ad0"], 
-    ["../../PVDaten/Real/LimesysDataCleanedTmp/622592/*_ee382cc56a3fb03a01b19cbdd49d456f.csv", "622592", "ee382cc56a3fb03a01b19cbdd49d456f"]  
+    ["../../PVDaten/Real/LimesysDataCleanedTmp/622592/*_ee382cc56a3fb03a01b19cbdd49d456f.csv", "622592", "ee382cc56a3fb03a01b19cbdd49d456f"],
+    ["../../PVDaten/Real/LimesysDataCleanedTmp/1081347/*_f55054c9be71ab6580aa39aea9b81e69.csv", "1081347", "f55054c9be71ab6580aa39aea9b81e69"]
 ]
 
 for ds in datasets:
@@ -56,4 +57,11 @@ for ds in datasets:
     pre.df['defect'] = pre.df['string_id'].isin(faultyStrings)
 
     # Save dataframe in csv file (static path)
-    pre.df.to_csv("./data/dataframes/" + ID + "_" + setID +".csv")
+    pre.df.to_csv("./data/paper/dataframes/" + ID + "_" + setID +".csv")
+
+    # Counts
+    print(ID + "_" + setID + ":\n")
+    print(pre.df.count())
+
+    print("\nDefect Counts:\n")
+    print(pre.df['defect'].value_counts())
